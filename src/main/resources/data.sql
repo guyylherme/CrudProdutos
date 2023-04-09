@@ -1,0 +1,2 @@
+insert into produto(nome, descricao, preco, categoria) values ('Coca-Cola', 'Refrigerante', '5', 'BEBIBA'); 
+insert into produto(nome, descricao, preco, categoria) values ('Doritos', 'Biscoito', '15', 'COMIDA'); 
