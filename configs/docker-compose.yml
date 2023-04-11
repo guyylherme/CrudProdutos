@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  devops_app:
+    image: "guylherme/devops"
+    depends_on:
+      - zipkin
+    ports:
+      - "8080:8080"
+    networks:
+      - spring_network_app
+  zipkin:
+    image: "openzipkin/zipkin"
+    ports:
+      - "9411:9411"
+    networks:
+      - spring_network_app
+  prometheus:
+    image: "prom/prometheus"
+    ports:
+      - "9090:9090"
+    networks:
+      - spring_network_app
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: "grafana/grafana"
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      - spring_network_app
+
+networks:
+  spring_network_app:
+    driver: bridge
